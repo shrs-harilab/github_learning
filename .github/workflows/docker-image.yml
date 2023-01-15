@@ -17,11 +17,20 @@ jobs:
           path: /tmp/docker-registry
           key: ${{ env.CACHE_KEY }}
           restore-keys: ${{env.CACHE_KEY_PREFIX}}
-      - name: Build
+      - name: build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          target: build
+          push: false
+          tags: ${{github.run_number}}
+          cache-to: type=local,dest=/tmp/docker-registry
+          cache-from: type=local,src=/tmp/docker-registry
+      - name: package
         uses: docker/build-push-action@v3
         with:
           context: .
           push: false
-          tags: latest
+          tags: ${{github.run_number}}
           cache-to: type=local,dest=/tmp/docker-registry
           cache-from: type=local,src=/tmp/docker-registry
