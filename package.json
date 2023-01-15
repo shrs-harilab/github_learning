@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/shrs-harilab/github_learning/issues"
   },
-  "homepage": "https://github.com/shrs-harilab/github_learning#readme"
+  "homepage": "https://github.com/shrs-harilab/github_learning#readme",
+  "dependencies": {
+    "jest": "^29.3.1"
+  }
 }
