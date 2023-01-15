@@ -1,13 +1,12 @@
 name: Docker Image CI
 
 on: workflow_dispatch
-env:
-  CACHE_KEY_PREFIX: ${{ runner.os }}-docker-cache-
-  CACHE_KEY: ${{ runner.os }}-docker-cache-${{hashFiles('Dockerfile')}}
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      CACHE_KEY_PREFIX: ${{ runner.os }}-docker-cache-
+      CACHE_KEY: ${{ runner.os }}-docker-cache-${{hashFiles('Dockerfile')}}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
