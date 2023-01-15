@@ -14,4 +14,4 @@ jobs:
           path: /tmp/docker-registry
           key: docker-registry-no-buildkit-${{ hashFiles('Dockerfile') }}
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --cache-from=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --cache-from=type=local,src=/tmp/docker-registry --cache-to=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
