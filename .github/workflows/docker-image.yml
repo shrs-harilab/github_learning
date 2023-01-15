@@ -12,7 +12,7 @@ jobs:
         uses: actions/cache@v3
         env:
           CACHE_KEY_PREFIX: ${{ runner.os }}-docker-cache-
-          CACHE_KEY: ${{ runner.os }}-docker-cache-${{hashFiles('Dockerfile')}}
+          CACHE_KEY: ${{ runner.os }}-docker-cache-${{hashFiles('Dockerfile','package-lock.json')}}
         with:
           path: /tmp/docker-registry
           key: ${{ env.CACHE_KEY }}
