@@ -8,10 +8,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - id: cache-docker
         uses: actions/cache@v3
         with:
           path: /tmp/docker-registry
           key: docker-registry-no-buildkit-${{ hashFiles('Dockerfile') }}
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --cache-from=type=local,src=/tmp/docker-registry --cache-to=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
+        run: docker buildx build . --file Dockerfile --cache-from=type=local,src=/tmp/docker-registry --cache-to=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
