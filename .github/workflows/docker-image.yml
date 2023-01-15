@@ -14,6 +14,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/docker-registry
-          key: docker-registry-no-buildkit-${{ hashFiles('Dockerfile') }}
+          key: docker-cache
       - name: Build the Docker image
         run: docker buildx build . --file Dockerfile --cache-from=type=local,src=/tmp/docker-registry --cache-to=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
