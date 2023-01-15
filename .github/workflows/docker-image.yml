@@ -1,7 +1,9 @@
 name: Docker Image CI
 
 on: workflow_dispatch
-
+env:
+  CACHE_KEY_PREFIX: ${{ runner.os }}-docker-cache-
+  CACHE_KEY: ${{ runner.os }}-docker-cache-${{hashFiles('Dockerfile')}}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,6 +16,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/docker-registry
-          key: docker-cache
-      - name: Build the Docker image
-        run: docker buildx build . --file Dockerfile --cache-from=type=local,src=/tmp/docker-registry --cache-to=type=local,dest=/tmp/docker-registry --tag my-image-name:$(date +%s)
+          key: ${{ env.CACHE_KEY }}
+          restore-keys: ${{env.CACHE_KEY_PREFIX}}
+      - name: Build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+          tags: latest
+          cache-to: type=local,dest=/tmp/docker-registry
+          cache-from: type=local,src=/tmp/docker-registry
