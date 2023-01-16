@@ -5,6 +5,7 @@ RUN echo test2
 RUN echo test3
 COPY package*.json ./
 RUN npm ci
+RUN ls
 
 FROM pierrezemb/gostatic
 
