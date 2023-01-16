@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: package2
-        run: docker buildx build --push --cache-from type=registry,ref=harilab/test5 --cache-to type=registry,ref=harilab/test5,mode=max . -t harilab/test5
+        run: docker buildx build --push --cache-from type=registry,ref=harilab/test6 --cache-to type=registry,ref=harilab/test6,mode=max . -t harilab/test6
       # - name: package
       #   uses: docker/build-push-action@v3
       #   with:
