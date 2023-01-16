@@ -3,6 +3,8 @@ RUN echo test
 COPY some.js some.js
 RUN echo test2
 RUN echo test3
+COPY package*.json ./
+RUN npm ci
 
 FROM pierrezemb/gostatic
 
