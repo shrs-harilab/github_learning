@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/shrs-harilab/github_learning#readme",
   "dependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.3.1",
+    "ts": "^0.2.2"
   }
 }
